@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minha TimelineJS Customizada</title>
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
   <style>
@@ -9,38 +10,65 @@
       margin: 0;
       padding: 0;
       height: 100%;
+      width: 100%;
+      overflow: hidden;
     }
 
     #timeline-embed {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
     }
 
-    /* Customização: remove a barra inferior (menubar) */
-    .tl-timenav {
+    /* Remove menubar (botões de zoom) */
+    .tl-menubar {
       display: none !important;
+    }
+
+    /* Remove a linha do tempo (timeline nav) */
+    .tl-timenav,
+    .tl-timenav-container,
+    .tl-timeaxis,
+    .tl-timeaxis-background,
+    .tl-timeaxis-tick,
+    .tl-timeaxis-tick:before {
+      display: none !important;
+      height: 0 !important;
+    }
+
+    /* Garante que todo o conteúdo preencha a tela */
+    .tl-timeline,
+    .tl-slider-container-mask {
+      height: 100% !important;
+      max-height: 100% !important;
+    }
+
+    /* Evita espaços internos que causam a "barra branca" */
+    .tl-storyslider {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
     }
   </style>
 </head>
 <body>
   <div id="timeline-embed"></div>
 
-<script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
-<script>
-  window.timeline = new TL.Timeline('timeline-embed',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vSAuvo2nNcbbEFNb8BKzcHZ4STdGkREoUerRBFEw8WePxvwdoIG3TmwjX0BiXciXO_8QO7keaaGpqcz/pubhtml',
-    {
-      lang: 'pt',
-      initial_zoom: 2
-    });
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <script>
+    const isMobile = window.innerWidth < 768;
 
-  window.timeline.on('loaded', function () {
-    const timenav = document.querySelector('.tl-timenav');
-    if (timenav) {
-      timenav.style.display = 'none';
-    }
-  });
-</script>
-
+    window.timeline = new TL.Timeline(
+      'timeline-embed',
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vSAuvo2nNcbbEFNb8BKzcHZ4STdGkREoUerRBFEw8WePxvwdoIG3TmwjX0BiXciXO_8QO7keaaGpqcz/pubhtml',
+      {
+        lang: 'pt',
+        initial_zoom: isMobile ? 1 : 2,
+        height: '100%'
+      }
+    );
+  </script>
 </body>
 </html>
