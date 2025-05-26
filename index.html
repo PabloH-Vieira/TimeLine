@@ -6,52 +6,78 @@
   <title>Timeline Responsiva</title>
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background-color: #1e3b4e; /* garante que qualquer fundo fora da timeline fique da mesma cor */
-    }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #1e3b4e;
+  }
 
-    #timeline-embed {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-    }
+  #timeline-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
 
-    /* Remover menubar e timeline nav */
-    .tl-menubar,
-    .tl-timenav,
-    .tl-timeaxis,
-    .tl-timeaxis-background,
-    .tl-timeaxis-tick,
-    .tl-timeaxis-tick:before {
-      display: none !important;
-      height: 0 !important;
-    }
+  /* Remover navegação desnecessária */
+  .tl-menubar,
+  .tl-timenav,
+  .tl-timeaxis,
+  .tl-timeaxis-background,
+  .tl-timeaxis-tick,
+  .tl-timeaxis-tick:before {
+    display: none !important;
+    height: 0 !important;
+  }
 
-    /* Força que a timeline ocupe toda a tela */
-    .tl-timeline,
-    .tl-storyslider,
-    .tl-slider-container-mask,
+  /* Garante que a timeline ocupe o máximo da tela sem forçar overflow */
+  .tl-timeline,
+  .tl-storyslider,
+  .tl-slider-container-mask,
+  .tl-slide {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Permite rolagem apenas do texto no mobile */
+  .tl-text {
+    overflow-y: auto !important;
+    max-height: 100vh !important;
+    padding-right: 1rem;
+  }
+
+  /* Remove margens desnecessárias */
+  .tl-storyslider {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Adapta o texto para telas pequenas */
+  @media screen and (max-width: 768px) {
     .tl-slide {
-      height: 100% !important;
-      max-height: 100% !important;
-      overflow: hidden !important;
+      flex-direction: column !important;
     }
 
-    /* Remove espaços internos desnecessários */
-    .tl-storyslider {
-      margin: 0 !important;
-      padding: 0 !important;
+    .tl-text {
+      font-size: 1rem;
+      padding: 1rem !important;
     }
+
+    .tl-media {
+      max-height: 40vh;
+      overflow: hidden;
+    }
+  }
   </style>
 </head>
 <body>
