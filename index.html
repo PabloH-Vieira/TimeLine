@@ -34,11 +34,10 @@
       initial_zoom: 2
     });
 
-  // Espera a timeline estar pronta para aplicar o estilo
-  window.timeline.on('loaded', function() {
-    const menubar = document.querySelector('.tl-menubar');
-    if (menubar) {
-      menubar.style.display = 'none';
+  window.timeline.on('loaded', function () {
+    const timenav = document.querySelector('.tl-timenav');
+    if (timenav) {
+      timenav.style.display = 'none';
     }
   });
 </script>
