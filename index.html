@@ -25,14 +25,23 @@
 <body>
   <div id="timeline-embed"></div>
 
-  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
-  <script>
-    window.timeline = new TL.Timeline('timeline-embed',
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vSAuvo2nNcbbEFNb8BKzcHZ4STdGkREoUerRBFEw8WePxvwdoIG3TmwjX0BiXciXO_8QO7keaaGpqcz/pubhtml',
-      {
-        lang: 'pt',
-        initial_zoom: 2
-      });
-  </script>
+<script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+<script>
+  window.timeline = new TL.Timeline('timeline-embed',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vSAuvo2nNcbbEFNb8BKzcHZ4STdGkREoUerRBFEw8WePxvwdoIG3TmwjX0BiXciXO_8QO7keaaGpqcz/pubhtml',
+    {
+      lang: 'pt',
+      initial_zoom: 2
+    });
+
+  // Espera a timeline estar pronta para aplicar o estilo
+  window.timeline.on('loaded', function() {
+    const menubar = document.querySelector('.tl-menubar');
+    if (menubar) {
+      menubar.style.display = 'none';
+    }
+  });
+</script>
+
 </body>
 </html>
